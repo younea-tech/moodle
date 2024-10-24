@@ -184,6 +184,7 @@ $PAGE->requires->data_for_js('scormplayerdata', Array('launch' => false,
                                                        'popupoptions' => $scorm->options), true);
 $PAGE->requires->js('/mod/scorm/request.js', true);
 $PAGE->requires->js('/lib/cookies.js', true);
+$PAGE->requires->js('/mod/scorm/custom.js', true);
 
 if (file_exists($CFG->dirroot.'/mod/scorm/datamodels/'.$scorm->version.'.js')) {
     $PAGE->requires->js('/mod/scorm/datamodels/'.$scorm->version.'.js', true);

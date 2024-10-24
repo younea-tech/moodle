@@ -272,3 +272,92 @@
 #page-mod-scorm-player #scormpage div.yui3-g-r img {
     max-width: 100%;
 }
+
+
+/**
+* CUSTOM BEGINS
+**/
+
+
+@supports (-webkit-touch-callout: none) {
+
+
+    /* CSS specific to iOS devices */
+    #scorm_content {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+        height: 100%;
+        border: 0px;
+        z-index: 999;
+        margin: 0px !important;
+        padding: 0px !important;
+        border: 0px !important;
+    }
+
+
+    #page-mod-scorm-player #scormpage #scorm_content {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        overflow: hidden;
+    }
+
+
+    #scorm_layout {
+        position: absolute;
+        margin: 0px !important;
+        padding: 0px !important;
+        border: 0px !important;
+        overflow: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+}
+
+
+@supports not (-webkit-touch-callout: none) {
+
+
+    /* CSS for other than iOS devices */
+    #scorm_content {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+        height: 100%;
+        border: 0px;
+        z-index: 999;
+        margin: 0px !important;
+        padding: 0px !important;
+        border: 0px !important;
+        overflow: hidden;
+    }
+
+
+    #page-mod-scorm-player #scormpage #scorm_content {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        overflow: hidden;
+
+
+    }
+
+
+    #scorm_layout {
+        position: absolute;
+        margin: 0px !important;
+        padding: 0px !important;
+        border: 0px !important;
+        overflow: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        border: 0px;
+    }
+
+
+}

@@ -5829,16 +5829,10 @@ function email_to_user($user, $from, $subject, $messagetext, $messagehtml = '', 
         $mail->MessageID = generate_email_messageid();
     }
 
-    if ($messagehtml && !empty($user->mailformat) && $user->mailformat == 1) {
-        // Don't ever send HTML to users who don't want it.
-        $mail->isHTML(true);
-        $mail->Encoding = 'quoted-printable';
-        $mail->Body    =  $messagehtml;
-        $mail->AltBody =  "\n$messagetext\n";
-    } else {
-        $mail->IsHTML(false);
-        $mail->Body =  "\n$messagetext\n";
-    }
+    $mail->isHTML(true);
+    $mail->Encoding = 'quoted-printable';
+    $mail->Body    =  $messagehtml;
+    $mail->AltBody =  "\n$messagetext\n";
 
     if ($attachment && $attachname) {
         if (preg_match( "~\\.\\.~" , $attachment )) {
