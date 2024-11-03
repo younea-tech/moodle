@@ -50,6 +50,6 @@ function checkJqueryScormPopup() {
         } else {
             console.log("jQuery ist bereits geladen:", $.fn.jquery);
         }
-        window.setTimeout("checkVariable2();", 100);
+        window.setTimeout("checkJqueryScormPopup();", 100);
     }
 }
