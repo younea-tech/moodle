@@ -39,7 +39,17 @@ function checkJqueryScormPopup() {
         });
     }
     else {
-        console.log("Not loaded");
-        window.setTimeout("checkJqueryScormPopup();", 1000);
+        if (typeof jQuery === 'undefined') {  // Prüft, ob jQuery nicht bereits definiert ist
+            var script = document.createElement('script');
+            script.src = "https://cdn.younea.tech/jquery/jquery-3.7.1.min.js";  // Die gewünschte jQuery-Version angeben
+            script.type = "text/javascript";
+            script.onload = function() {
+                console.log("jQuery wurde erfolgreich geladen:", $.fn.jquery);
+            };
+            document.head.appendChild(script);
+        } else {
+            console.log("jQuery ist bereits geladen:", $.fn.jquery);
+        }
+        window.setTimeout("checkVariable2();", 100);
     }
 }
