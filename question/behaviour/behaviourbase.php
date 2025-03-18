@@ -557,7 +557,7 @@ abstract class question_behaviour {
         if ($step->has_behaviour_var('comment')) {
             $comment = question_utils::to_plain_text($step->get_behaviour_var('comment'),
                     $step->get_behaviour_var('commentformat'));
-            $a->comment = shorten_text($comment, 200);
+            $a->comment = shorten_text($comment, 1000);
         } else {
             $a->comment = '';
         }
