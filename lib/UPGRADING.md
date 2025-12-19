@@ -1,5 +1,47 @@
 # core (subsystem) Upgrade notes
 
+## 4.5.8
+
+### Changed
+
+- The Hook Manager now uses localcache instead of caching via MUC.
+
+  For more information see [MDL-87107](https://tracker.moodle.org/browse/MDL-87107)
+
+### Fixed
+
+- `restore_qtype_plugin::unset_excluded_fields` now returns the modified questiondata structure,
+  in order to support structures that contain arrays.
+  If your qtype plugin overrides `restore_qtype_plugin::remove_excluded_question_data` without
+  calling the parent method, you may need to modify your overridden method to use the returned
+  value.
+
+  For more information see [MDL-85975](https://tracker.moodle.org/browse/MDL-85975)
+- When responding to pcntl signals, call existing signal handlers.
+
+  For more information see [MDL-87079](https://tracker.moodle.org/browse/MDL-87079)
+
+## 4.5.7
+
+### Added
+
+- The Behat `::execute()` method now accepts an array-style callable in addition to the string `classname::method` format.
+
+  The following formats are now accepted:
+
+  ```php
+  // String format:
+  $this->execute('behat_general::i_click_on', [...]);
+
+  // Array format:
+  $this->execute([behat_general::class,' i_click_on'], [...]);
+  ```
+
+  For more information see [MDL-86231](https://tracker.moodle.org/browse/MDL-86231)
+- The `\externallib_advanced_testcase` has been replaced by `\core_external\tests\externallib_testcase` and is now autoloadable.
+
+  For more information see [MDL-86283](https://tracker.moodle.org/browse/MDL-86283)
+
 ## 4.5.6
 
 ### Added

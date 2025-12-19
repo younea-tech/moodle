@@ -6,6 +6,84 @@ More detailed information on key changes can be found in the [Developer update n
 
 The format of this change log follows the advice given at [Keep a CHANGELOG](https://keepachangelog.com).
 
+## 4.5.8
+
+### core
+
+#### Changed
+
+- The Hook Manager now uses localcache instead of caching via MUC.
+
+  For more information see [MDL-87107](https://tracker.moodle.org/browse/MDL-87107)
+
+#### Fixed
+
+- `restore_qtype_plugin::unset_excluded_fields` now returns the modified questiondata structure,
+  in order to support structures that contain arrays.
+  If your qtype plugin overrides `restore_qtype_plugin::remove_excluded_question_data` without
+  calling the parent method, you may need to modify your overridden method to use the returned
+  value.
+
+  For more information see [MDL-85975](https://tracker.moodle.org/browse/MDL-85975)
+- When responding to pcntl signals, call existing signal handlers.
+
+  For more information see [MDL-87079](https://tracker.moodle.org/browse/MDL-87079)
+
+### mod_glossary
+
+#### Added
+
+- Function mod_glossary_rating_can_see_item_ratings is now implemented for checking permissions to view ratings.
+
+  For more information see [MDL-86960](https://tracker.moodle.org/browse/MDL-86960)
+
+## 4.5.7
+
+### core
+
+#### Added
+
+- The Behat `::execute()` method now accepts an array-style callable in addition to the string `classname::method` format.
+
+  The following formats are now accepted:
+
+  ```php
+  // String format:
+  $this->execute('behat_general::i_click_on', [...]);
+
+  // Array format:
+  $this->execute([behat_general::class,' i_click_on'], [...]);
+  ```
+
+  For more information see [MDL-86231](https://tracker.moodle.org/browse/MDL-86231)
+- The `\externallib_advanced_testcase` has been replaced by `\core_external\tests\externallib_testcase` and is now autoloadable.
+
+  For more information see [MDL-86283](https://tracker.moodle.org/browse/MDL-86283)
+
+### core_badges
+
+#### Added
+
+- A number of new static methods have been added to `core_badges\backpack_api` to support the new Canvas Credentials backpack provider. These methods allow you to retrieve lists of providers and regions, check if Canvas Credentials fields should be displayed, and get a region URL or API URL based on a given region ID. The new methods include `get_providers`, `get_regions`, `display_canvas_credentials_fields`, `get_region_url`, `get_region_api_url`, `get_regionid_from_url`, and `is_canvas_credentials_region`.
+
+  For more information see [MDL-86174](https://tracker.moodle.org/browse/MDL-86174)
+
+### core_grades
+
+#### Added
+
+- New 'is_gradable()' function has been created to return whether the item has any gradeitem that is GRADE_TYPE_VALUE or GRADE_TYPE_SCALE.
+
+  For more information see [MDL-85837](https://tracker.moodle.org/browse/MDL-85837)
+
+### core_message
+
+#### Added
+
+- The `contexturl` property to `\core\message\message` instances can now contain `\core\url` values in addition to plain strings
+
+  For more information see [MDL-83080](https://tracker.moodle.org/browse/MDL-83080)
+
 ## 4.5.6
 
 ### core

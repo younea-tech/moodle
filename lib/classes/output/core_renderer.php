@@ -663,8 +663,8 @@ class core_renderer extends renderer_base {
             $fullname = fullname($USER);
             // Since Moodle 2.0 this link always goes to the public profile page (not the course profile page)
             if ($withlinks) {
-                $linktitle = get_string('viewprofile');
-                $username = "<a href=\"$CFG->wwwroot/user/profile.php?id=$USER->id\" title=\"$linktitle\">$fullname</a>";
+                $userurl = new moodle_url('/user/profile.php', ['id' => $USER->id]);
+                $username = html_writer::link($userurl, $fullname);
             } else {
                 $username = $fullname;
             }
@@ -1508,7 +1508,8 @@ class core_renderer extends renderer_base {
         $context->ariarole = !empty($bc->attributes['role']) ? $bc->attributes['role'] : '';
         $context->class = $bc->attributes['class'];
         $context->type = $bc->attributes['data-block'];
-        $context->title = $bc->title;
+        $context->title = (string) $bc->title;
+        $context->showtitle = $context->title !== '';
         $context->content = $bc->content;
         $context->annotation = $bc->annotation;
         $context->footer = $bc->footer;
@@ -1674,14 +1675,20 @@ class core_renderer extends renderer_base {
             $attributes['class'] = 'action-icon';
         }
 
-        if ($linktext) {
-            $text = $pixicon->attributes['alt'];
-            // Set the icon as a decorative image if we're displaying the action text.
-            // Otherwise, the action name will be read twice by assistive technologies.
-            $pixicon->attributes['alt'] = '';
-            $pixicon->attributes['title'] = '';
-            $pixicon->attributes['aria-hidden'] = 'true';
-        } else {
+        $text = $pixicon->attributes['alt'];
+        // Set the icon as a decorative image. The accessible label should be within the link itself and not the icon.
+        $pixicon->attributes['alt'] = '';
+        $pixicon->attributes['title'] = '';
+        $pixicon->attributes['aria-hidden'] = 'true';
+
+        $attributes['class'] .= ' mx-1 p-1';
+        if (!$linktext) {
+            // Set a title attribute on the link for sighted users if no text is shown.
+            $attributes['title'] = $text;
+            // Style the icon button for increased target area.
+            $attributes['class'] .= ' btn btn-link icon-no-margin';
+            // Make the action text only available to screen readers.
+            $attributes['aria-label'] = $text;
             $text = '';
         }
 
